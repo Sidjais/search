@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "509710579579",
+    "project_id": "test-9b53f",
+    "storage_bucket": "test-9b53f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:509710579579:android:e2a4648ab4871dde386fde",
+        "android_client_info": {
+          "package_name": "com.siddhantjaiswal.dartwebscraping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "509710579579-bh1d4olvqhgpn7e8jcml1fjbe7rn7k9t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMOXihZfbodGEDUmkCltnYTxh-oaX7c0g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "509710579579-bh1d4olvqhgpn7e8jcml1fjbe7rn7k9t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:509710579579:android:848b5659ded3cc41386fde",
+        "android_client_info": {
+          "package_name": "com.siddhantjaiswal.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "509710579579-bh1d4olvqhgpn7e8jcml1fjbe7rn7k9t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMOXihZfbodGEDUmkCltnYTxh-oaX7c0g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "509710579579-bh1d4olvqhgpn7e8jcml1fjbe7rn7k9t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
