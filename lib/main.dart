@@ -12,7 +12,8 @@ var x;
 var xx=[];
 var list = [];
 var img=[];
-
+var rating=[];
+var ratno=[];
 // import 'package:html/dom.dart';
 void main() => runApp(WebScraperApp());
 
@@ -32,8 +33,9 @@ class _WebScraperAppState extends State<WebScraperApp> {
 
   void fetchProducts() async {
     busy=!busy;
-    x = await http
+   http.Response x = await http
         .get('https://www.google.com/maps/search/'+search);
+   
     var x1 = x.body.split("(Owner)");
     var len = x1.length;
     for (int i = 0; i < len - 1; i++) {
@@ -60,22 +62,42 @@ class _WebScraperAppState extends State<WebScraperApp> {
     xx.clear();
 
     for(int i=0;i<list.length;i++){
-      var rem=list[i].split(" ");
-      var inp='';
-      for(int j=0;j<rem.length;j++){
-        if (rem[j]!='\\\\u0026'){
-          if(inp==''){
-          inp=inp+rem[j];}
-        else{
-          inp=inp+' '+rem[j];
-          }
-        }}
-      list[i]=inp;
+      // var rem=list[i].split(" ");
+      // var inp='';
+      // for(int j=0;j<rem.length;j++){
+      //   if (rem[j]!='\\\\u0026'){
+      //     if(inp==''){
+      //     inp=inp+rem[j];}
+      //   else{
+      //     inp=inp+' '+rem[j];
+      //     }
+      //   }}
+      //list[i]=inp;
+      
+      var test=x.body.split('\\"'+list[i]+'\\"');
+
       print('\\"'+list[i]+'\\"');
     //print((x.body.split('\\"'+list[i]+'\\"')[2].split('\\"').length-2).toString()+(x.body.split('\\"'+list[i]+'\\"')[2].split('\\"').length).toString());
-      xx.add(x.body.split('\\"'+list[i]+'\\"').length>2? x.body.split('\\"'+list[i]+'\\"')[2].split('\\"')[x.body.split('\\"'+list[i]+'\\"')[2].split('\\"').length-2]:'' );
+      xx.add(test.length>2? test[2].split('\\"')[test[2].split('\\"').length-2]:'' );
+
+      var test2=test[0].split(']')[test[0].split(']').length-3].split(',');
+
+      rating.add(test.length>2? test2[test2.length-2] : '');
+      ratno.add(test.length>2? test2[test2.length-1] : '');
+
+      try{
+        double.parse(rating[i]);
+        double.parse(ratno[i]);
+      }
+      catch(e){
+        rating[i]='';
+        ratno[i]='';
+      }
+
+      list[i]=list[i].replaceAll('\\\\u0026','&');
     }
     print(xx.length);
+    print(x.body.split('\\"'+list[0]+'\\"')[0].split(']')[x.body.split('\\"'+list[0]+'\\"')[0].split(']').length-3].split(',')[x.body.split('\\"'+list[0]+'\\"')[0].split(']')[x.body.split('\\"'+list[0]+'\\"')[0].split(']').length-3].split(',').length-2]);
   // print(x.body.split('\\"'+list[1]+'\\"')[2].split('\\"')[x.body.split('\\"'+list[2]+'\\"')[2].split('\\"').length-2]);
    var count=[];
    for(int i=0;i<xx.length;i++)
@@ -115,6 +137,8 @@ class _WebScraperAppState extends State<WebScraperApp> {
    //  print(xxx.length);
    //  print(xx1.length);
 
+    print(rating);
+   print(ratno);
     setState(() {
       busy=!busy;
     });
@@ -194,7 +218,7 @@ class _WebScraperAppState extends State<WebScraperApp> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Product Catalog"),
+          title: Text("Searh"),
         ),
         body: SafeArea(
           child: Column(
@@ -245,7 +269,12 @@ class _WebScraperAppState extends State<WebScraperApp> {
                           xx[index]!=''?
                           Image.network(xx[index]):SizedBox(),
                           Container(
-                            child: Text(attributes),
+                            child: Row(
+                              children: [
+                                Text(attributes),
+                                rating[index]!=''? Row(children: [Text(' ('+rating[index]+' Stars,'),Text(' '+ratno[index]+' Ratings)')],): Text(' (No Ratings)')
+                              ],
+                            ),
                             margin: EdgeInsets.only(bottom: 10.0),
                           ),
                           // InkWell(
